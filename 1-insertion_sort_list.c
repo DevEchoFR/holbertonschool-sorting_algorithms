@@ -13,9 +13,7 @@ void insertion_sort_list(listint_t **list)
 	listint_t *next_node;
 
 	if (!list || !*list || (*list)->next == NULL)
-	{
 		return;
-	}
 
 	current = (*list)->next;
 
@@ -41,10 +39,12 @@ void insertion_sort_list(listint_t **list)
 			if (next_node)
 				next_node->prev = prev_node;
 
-			node = node->prev;
+			if (node->prev)
+				node = node->prev;
+			else
+				break;
 
-			continue;
+			current = node->next;
 		}
-		current = node->next;
 	}
 }
