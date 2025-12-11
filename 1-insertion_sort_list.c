@@ -6,18 +6,44 @@
  */
 void insertion_sort_list(listint_t **list)
 {
-	int i, j;
-	int key;
+	listint_t *current;
+	listint_t *node;
+	listint_t *prev_node;
+	listint_t *next_node;
 
-	for (i = 1; i < list; i++)
+	if (!list || !*list || (*list)->next == NULL)
 	{
-		key = list[i];
-		j = i - 1;
-		while (j >= 0 && list[j] > key)
+		return;
+	}
+
+	current = (*list)->next;
+
+	while (current)
+	{
+		node = current;
+		while (node->prev && node->n < node->prev->n)
 		{
-			list[j + 1] = list[j];
-			j = j - 1;
+			prev_node = node->prev;
+			next_node = node->next;
+
+			node->prev = prev_node->prev;
+			node->next = prev_node;
+
+			prev_node->prev = node;
+			prev_node->next = next_node;
+
+			if (node->prev)
+				node->prev->next = node;
+			else
+				*list = node;
+
+			if (next_node)
+				next_node->prev = prev_node;
+
+			node = node->prev;
+
+			continue;
 		}
-		list[j + 1] = key;
+		current = node->next;
 	}
 }
