@@ -44,13 +44,21 @@ void quick_sort_recursive(int *array, int low, int high, size_t size)
 			temp = array[j];
 			array[j] = array[i];
 			array[i] = temp;
-			print_array(array, size);
+			if (i != j)
+			{
+				print_array(array, size);
+			}
 			j++;
 		}
 	}
 	temp = array[high];
 	array[high] = array[j];
 	array[j] = temp;
+	if (j != high)
+	{
+		print_array(array, size);
+	}
+
 	quick_sort_recursive(array, low, j - 1, size);
 	quick_sort_recursive(array, j + 1, high, size);
 }
