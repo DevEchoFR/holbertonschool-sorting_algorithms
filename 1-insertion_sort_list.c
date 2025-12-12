@@ -39,7 +39,7 @@ void insertion_sort_list(listint_t **list)
 			if (next_node)
 				next_node->prev = prev_node;
 
-			print_list(*list);
+			prnt_list(*list);
 		}
 	}
 }
